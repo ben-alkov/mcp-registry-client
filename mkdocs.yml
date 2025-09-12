@@ -36,7 +36,7 @@ nav:
     - CLI Reference: cli.md
   - API Reference: api/
   - Development:
-    - Contributing: contributing.md
+    - Contributing: CONTRIBUTING.md
     - Testing Patterns: testing-patterns.md
     - Development Troubleshooting: development-troubleshooting.md
     - Error Handling: error-handling.md
