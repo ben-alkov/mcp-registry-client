@@ -1,0 +1,15 @@
+# Disable automatic dependency submission
+name: "Dependency Submission"
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  submit-dependencies:
+    if: false  # Disable this workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Disabled"
+        run: echo "Dependency submission disabled"

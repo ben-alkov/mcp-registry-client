@@ -5,7 +5,7 @@ h11==0.16.0
 httpcore==1.0.9
 httpx==0.28.1
 idna==3.10
--e file:///home/balkov/Source/mcp-registry-client
+-e .
 pydantic==2.11.7
 pydantic-core==2.33.2
 sniffio==1.3.1
