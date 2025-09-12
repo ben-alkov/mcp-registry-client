@@ -1,0 +1,158 @@
+[project]
+name = "mcp-registry-client"
+version = "0.1.0"
+description = "A Python client for searching and retrieving MCP servers from the official registry"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.25.0",
+    "pydantic>=2.5.0",
+    "tomli>=2.0.0; python_version<'3.11'",
+]
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+keywords = ["mcp", "model-context-protocol", "registry", "client"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-html>=3.2.0",
+    "pytest-benchmark>=4.0.0",
+    "mypy>=1.8.0",
+    "ruff>=0.1.9",
+    "bandit>=1.7.5",
+    "nox>=2023.4.22",
+]
+docs = [
+    "mkdocs-material>=9.5.0",
+    "mkdocs-gen-files>=0.5.0",
+    "mkdocs-literate-nav>=0.6.1",
+    "mkdocstrings[python]>=0.24.0",
+]
+
+[project.scripts]
+mcp-registry = "mcp_registry_client.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 92
+output-format = "grouped"
+show-fixes = true
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["ALL"]
+
+# Avoid trying to fix
+#  (B): flake8-bugbear violations
+unfixable = ["B"]
+
+# COM812 missing-trailing-comma - redundant when using ruff.format
+# D203 incorrect-blank-line-before-class
+# D213 multi-line-summary-second-line
+ignore = ["D203", "D213", "COM812"]
+
+[tool.ruff.lint.flake8-pytest-style]
+parametrize-names-type = "csv"
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+
+[tool.ruff.lint.per-file-ignores]
+# ANN001 missing-type-function-argument
+# ANN003 missing-type-kwargs
+# DTZ005 call-datetime-now-without-tzinfo
+# PLR2004 magic-value-comparison
+# S101 use of assert
+# [SIM] flake8-simplify
+# [SLF] flake8-self
+"tests/**/*" = ["ANN001", "ANN201", "DTZ005", "PLR2004", "S101", "SIM", "SLF001"]
+"noxfile.py" = ["ANN001"]
+
+[tool.ruff.format]
+docstring-code-format = true
+quote-style = "single"
+
+[tool.mypy]
+python_version = "3.12"
+plugins = ["pydantic.mypy"]
+check_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_no_return = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = "nox.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "noxfile"
+disallow_untyped_decorators = false
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+disallow_untyped_decorators = false
+
+[tool.bandit]
+skips = [
+  "B404", # import subprocess
+  "B603", # subprocess_without_shell_equals_true
+]
+exclude_dirs = ["tests"]
+
+[tool.pytest.ini_options]
+log_cli_level = "DEBUG"
+log_format = "%(asctime)s %(levelname)s %(message)s"
+log_date_format = "%Y-%m-%d %H:%M:%S"
+testpaths = ["tests"]
+addopts = "-v --cov=mcp_registry_client --cov-report=term-missing --cov-report=html --tb=native --html=latest_tests.html --self-contained-html --capture=no"
+asyncio_mode = "auto"
+markers = [
+    "benchmark: marks tests as benchmarks (deselect with '-m \"not benchmark\"')",
+    "integration: marks tests as integration tests (deselect with '-m \"not integration\"')",
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+
+[tool.coverage.run]
+source = ["mcp_registry_client"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+    "if TYPE_CHECKING:",
+    "return NotImplemented",
+]

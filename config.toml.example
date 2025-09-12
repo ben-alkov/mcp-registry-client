@@ -1,0 +1,19 @@
+# MCP Registry Client Configuration
+
+[client]
+# Connection settings
+base_url = "https://registry.modelcontextprotocol.io"
+timeout = 30.0
+connect_timeout = 10.0
+read_timeout = 30.0
+write_timeout = 10.0
+pool_timeout = 5.0
+user_agent = "mcp-registry-client/0.1.0"
+
+# Retry settings
+max_retries = 3
+retry_delay = 1.0
+backoff_factor = 2.0
+
+# Cache settings
+cache_ttl = 300

@@ -1,0 +1,70 @@
+site_name: MCP Registry Client
+site_description: A Python client for searching and retrieving MCP servers from the official registry
+site_url: https://mcp-registry-client.readthedocs.io/
+repo_url: https://github.com/user/mcp-registry-client
+repo_name: user/mcp-registry-client
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - User Guide:
+    - Installation: installation.md
+    - Quick Start: quickstart.md
+    - CLI Reference: cli.md
+  - API Reference: api/
+  - Development:
+    - Contributing: contributing.md
+    - Testing Patterns: testing-patterns.md
+    - Development Troubleshooting: development-troubleshooting.md
+    - Error Handling: error-handling.md
+    - Troubleshooting: troubleshooting.md
+    - Changelog: changelog.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+
+plugins:
+  - search
+  - gen-files:
+      scripts:
+        - docs/gen_ref_pages.py
+  - literate-nav:
+      nav_file: SUMMARY.md
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
