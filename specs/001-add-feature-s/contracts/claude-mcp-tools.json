@@ -1,0 +1,252 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Claude Code MCP Registry Integration",
+    "version": "1.0.0",
+    "description": "MCP tool contracts for Claude Code registry integration"
+  },
+  "components": {
+    "schemas": {
+      "ClaudeSearchRequest": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Natural language search query",
+            "maxLength": 500
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 1,
+            "description": "Page number for pagination"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "default": 10,
+            "description": "Number of results per page"
+          },
+          "category": {
+            "type": "string",
+            "description": "Filter by category",
+            "enum": ["productivity", "data", "ai", "development", "communication"]
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClaudeSearchResponse": {
+        "type": "object",
+        "required": ["content"],
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["text"]
+                },
+                "text": {
+                  "type": "string",
+                  "description": "Formatted search results for Claude Code display"
+                }
+              },
+              "required": ["type", "text"]
+            }
+          },
+          "is_error": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "ClaudeServerDetailRequest": {
+        "type": "object",
+        "required": ["server_name"],
+        "properties": {
+          "server_name": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$",
+            "description": "Server identifier in org/repo format"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClaudeServerDetailResponse": {
+        "type": "object",
+        "required": ["content"],
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["text"]
+                },
+                "text": {
+                  "type": "string",
+                  "description": "Formatted server details for Claude Code display"
+                }
+              },
+              "required": ["type", "text"]
+            }
+          },
+          "is_error": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "ClaudeInstallRequest": {
+        "type": "object",
+        "required": ["server_name", "scope"],
+        "properties": {
+          "server_name": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$",
+            "description": "Server identifier to install"
+          },
+          "scope": {
+            "type": "string",
+            "enum": ["local", "project", "user"],
+            "description": "Installation scope"
+          },
+          "env_overrides": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Environment variable overrides"
+          },
+          "custom_name": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "Custom server name for configuration"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClaudeInstallResponse": {
+        "type": "object",
+        "required": ["content"],
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["text"]
+                },
+                "text": {
+                  "type": "string",
+                  "description": "Installation result message for Claude Code display"
+                }
+              },
+              "required": ["type", "text"]
+            }
+          },
+          "is_error": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/tools/search_servers": {
+      "post": {
+        "summary": "Search MCP servers in registry",
+        "description": "Search for MCP servers using natural language queries with pagination support",
+        "operationId": "search_servers",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClaudeSearchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Search results formatted for Claude Code",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaudeSearchResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/get_server_info": {
+      "post": {
+        "summary": "Get detailed server information",
+        "description": "Retrieve comprehensive information about a specific MCP server",
+        "operationId": "get_server_info",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClaudeServerDetailRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Server details formatted for Claude Code",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaudeServerDetailResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/install_server": {
+      "post": {
+        "summary": "Install MCP server from registry",
+        "description": "Install a selected MCP server with specified scope and configuration",
+        "operationId": "install_server",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClaudeInstallRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Installation result formatted for Claude Code",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaudeInstallResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
