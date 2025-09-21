@@ -296,6 +296,7 @@ Use [Conventional Commits][] format
 
 We use the following set of "types"
 
+- `agents:` agent-related changes (AGENTS.md, "agent-notes" dir)
 - `build:` build system changes
 - `chore:` tech-debt
 - `ci:` CI/CD changes

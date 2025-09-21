@@ -34,7 +34,7 @@ pip install mcp-registry-client
 Install from source:
 
 ```bash
-git clone https://github.com/user/mcp-registry-client.git
+git clone https://github.com/ben-alkov/mcp-registry-client.git
 cd mcp-registry-client
 
 # create virtual environment
@@ -169,7 +169,7 @@ This is TL;DR, see [CONTRIBUTING](CONTRIBUTING.md)
 
 ```bash
 # Clone repository
-git clone https://github.com/user/mcp-registry-client.git
+git clone https://github.com/ben-alkov/mcp-registry-client.git
 cd mcp-registry-client
 
 # create venv
@@ -276,7 +276,7 @@ root of the repo for details.
 [PyPI Package]: https://pypi.org/project/mcp-registry-client
 -->
 
-[Documentation]: https://https://ben-alkov.github.io/mcp-registry-client
+[Documentation]: https://ben-alkov.github.io/mcp-registry-client
 [Issue Tracker]: https://github.com/ben-alkov/mcp-registry-client/issues
 [mcp-registry]: https://registry.modelcontextprotocol.io
 [Model Context Protocol]: https://modelcontextprotocol.io

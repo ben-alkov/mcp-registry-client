@@ -26,7 +26,7 @@ uv pip install mcp-registry-client
 For development or to get the latest features:
 
 ```bash
-git clone https://github.com/user/mcp-registry-client.git
+git clone https://github.com/ben-alkov/mcp-registry-client.git
 cd mcp-registry-client
 uv pip install -e .
 ```
@@ -36,7 +36,7 @@ uv pip install -e .
 For contributing to the project:
 
 ```bash
-git clone https://github.com/user/mcp-registry-client.git
+git clone https://github.com/ben-alkov/mcp-registry-client.git
 cd mcp-registry-client
 
 # Create virtual environment
