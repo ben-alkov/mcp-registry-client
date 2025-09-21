@@ -1,6 +1,13 @@
-# CLAUDE.md
+# AGENTS.md
+
+*AFTER READING* this file, always say 'I have remembered the project AGENTS.md
+memory file'
 
 This file provides guidance to AI agents when working with code in this repository.
+
+!!! ALWAYS activate the virtual environment with `source .venv/bin/activate`
+
+!!! ALWAYS use `unset GITHUB_TOKEN;` when calling the `gh` command
 
 ## Commands
 
