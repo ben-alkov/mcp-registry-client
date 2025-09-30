@@ -128,6 +128,11 @@ settings.py
 *.swo
 tags
 
-# Claude Code `/repo-status-report` command output
+# Claude Code
+
+# output of `/context-compacts.md` command
 # should be regenerated regularly
-repo_health.md
+claude_compact_recent.md
+
+# local settings
+.claude/settings.local.json
