@@ -4,21 +4,27 @@
 
 import nox
 
+# default sessions to run (sorted alphabetically)
+nox.options.sessions = ['lint', 'security', 'type_check', 'tests']
+
+# reuse virtual environment for all sessions
+nox.options.reuse_venv = 'always'
+
 
 @nox.session
 def format_source(session) -> None:
     """Format code with ruff."""
     session.install('ruff')
-    session.run('ruff', 'format', '.')
-    session.run('ruff', 'check', '--fix', '.')
+    session.run(
+        'ruff', 'check', '--fix', '--unsafe-fixes', '--target-version', 'py312', '.'
+    )
 
 
 @nox.session
 def lint(session) -> None:
     """Run linting and formatting checks."""
     session.install('ruff')
-    session.run('ruff', 'check', '.')
-    session.run('ruff', 'format', '--check', '.')
+    session.run('ruff', 'check', '--target-version', 'py312', '.')
 
 
 @nox.session
