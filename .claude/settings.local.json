@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/balkov/**)",
+      "Bash(.specify/scripts/bash/update-agent-context.sh claude)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
