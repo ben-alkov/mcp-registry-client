@@ -294,19 +294,21 @@ pytest tests/ -m "benchmark" --benchmark-only
 
 Use [Conventional Commits][] format
 
-We use the following set of "types"
+We use the following set of "types". If you have one which isn't listed, feel
+free to use it. If we hate it, we'll let you know. OTOH, we might even adopt it :D.
 
-- `agents:` agent-related changes (AGENTS.md, "agent-notes" dir)
-- `build:` build system changes
-- `chore:` tech-debt
-- `ci:` CI/CD changes
-- `docs:` documentation changes
-- `feat:` new features
-- `fix:` bug fixes
-- `perf:` performance-related changes
-- `refactor:` refactoring changes - note that this is separate from `chore`
-- `revert:` reverting previous commits
-- `test:` test changes (net-new, fixes, refactor, ...)
+- agents: agent-related changes (AGENTS.md, "agent-notes" dir)
+- build: build system changes
+- chore: tech-debt
+- ci: CI/CD changes
+- docs: documentation changes
+- feat: new features
+- fix: bug fixes
+- perf: performance-related changes
+- refactor: refactoring changes - note that this is separate from chore
+- repo: .gitignore; git options; folder/file reorg; etc.
+- revert: reverting previous commits
+- test: test changes (net-new, fixes, refactor, ...)
 
 TL;DR
 
